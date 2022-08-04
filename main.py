@@ -9,8 +9,9 @@ stack = deque()
 
 OP_PUSH = 0
 OP_PLUS = 1
-OP_WRITE = 2
-COUNT_OPS = 3
+OP_MINUS = 2
+OP_WRITE = 3
+COUNT_OPS = 4
 
 def push(x):
     return (OP_PUSH, x)
@@ -18,7 +19,7 @@ def plus():
     return (OP_PLUS, )
 def write():
     return (OP_WRITE, )
-program = "5 6 + write".split("")
+program = "5 6 + write".split()
 """ program = [
     push(34),
     push(35),
@@ -28,12 +29,16 @@ program = "5 6 + write".split("")
 def com(program):
     ip = 0
     for ip in range(len(program)):
-        assert COUNT_OPS == 3, "You have instructions not handled properly."
+        assert COUNT_OPS == 4, "You have instructions not handled properly."
         code = program[ip]
         if code == '+':
             a = stack.pop()
             b = stack.pop()
             stack.append(a + b)
+        elif code == '-':
+            a = stack.pop()
+            b = stack.pop()
+            stack.append(b - a)
         elif code == 'write':
             a = stack.pop()
             print(a)
