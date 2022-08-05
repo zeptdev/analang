@@ -26,8 +26,8 @@ program = "5 6 + write".split()
     plus(),
     write()
 ] """ 
+ip = 0
 def com(program):
-    ip = 0
     for ip in range(len(program)):
         assert COUNT_OPS == 4, "You have instructions not handled properly."
         code = program[ip]
@@ -45,17 +45,13 @@ def com(program):
         else:
             stack.append(int(code))
         ip += 1
-def sim(program):
-    for op in program:
-        print("The Stack: " + str(stack))
-        if op[0] == OP_PUSH:
-            stack.append(int(op[1]))
-        elif op[0] == OP_PLUS:
-            a = stack.pop()
-            b = stack.pop()
-            stack.append(a + b)
-        elif op[0] == OP_WRITE:
-            a = stack.pop()
-            print(a)
-
+def types(stack ,program):
+    global ip
+    for ip in range(len(program)):
+        type_dict = {
+            "Current Token": program[ip],
+            "Stack Status": stack,
+        }
+        print(type_dict)
+types(stack, program)
 com(program)
